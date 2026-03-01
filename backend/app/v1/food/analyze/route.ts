@@ -1,5 +1,4 @@
 import crypto from "node:crypto";
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import {
@@ -62,31 +61,59 @@ export async function POST(req: NextRequest) {
     }
 
     const model = (process.env.ANTHROPIC_MODEL || "claude-haiku-4-5-20251001").trim();
-    const anthropic = new Anthropic({ apiKey });
-
-    const upstream = await anthropic.messages.create({
-      model,
-      max_tokens: 256,
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "image",
-              source: {
-                type: "base64",
-                media_type: "image/jpeg",
-                data: parsedReq.data.imageBase64
-              }
-            },
-            { type: "text", text: parsedReq.data.prompt }
-          ]
-        }
-      ]
+    const upstreamResp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: 256,
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "image",
+                source: {
+                  type: "base64",
+                  media_type: "image/jpeg",
+                  data: parsedReq.data.imageBase64
+                }
+              },
+              { type: "text", text: parsedReq.data.prompt }
+            ]
+          }
+        ]
+      })
     });
 
-    const textBlock = upstream.content.find((entry) => entry.type === "text");
-    const text = textBlock?.type === "text" ? textBlock.text.trim() : "";
+    const upstreamText = await upstreamResp.text();
+    if (!upstreamResp.ok) {
+      return NextResponse.json(
+        {
+          error: "upstream_error",
+          message: "Anthropic request failed",
+          details: upstreamText
+        },
+        { status: 502 }
+      );
+    }
+
+    const upstream = safeJsonParse<{
+      content?: Array<{ type?: string; text?: string }>;
+    }>(upstreamText);
+    if (!upstream || !Array.isArray(upstream.content)) {
+      return NextResponse.json(
+        { error: "upstream_error", message: "Unexpected Anthropic response shape" },
+        { status: 502 }
+      );
+    }
+
+    const textBlock = upstream.content.find((entry) => entry?.type === "text");
+    const text = String(textBlock?.text || "").trim();
     if (!text) {
       return NextResponse.json(
         { error: "upstream_error", message: "Anthropic returned no text content" },
