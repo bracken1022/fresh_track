@@ -41,3 +41,6 @@ GoogleService-Info.plist
 
 # Tooling
 .claude/
+backend/node_modules/
+backend/.env
+backend/.next/

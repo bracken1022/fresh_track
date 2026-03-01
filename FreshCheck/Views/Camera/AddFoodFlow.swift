@@ -37,11 +37,11 @@ struct AddFoodFlow: View {
             guard let image else { return }
             Task { await analyzeImage(image) }
         }
-        .alert("API Key Invalid", isPresented: $showingApiKeyError) {
+        .alert("Service Setup Error", isPresented: $showingApiKeyError) {
             Button("OK", role: .cancel) { dismiss() }
         } message: {
             Text(apiKeyErrorDetail.isEmpty
-                 ? "Missing or invalid ANTHROPIC_API_KEY. Set it in Xcode Scheme Environment Variables."
+                 ? "Missing proxy configuration. Set FRESHCHECK_PROXY_URL (and optional FRESHCHECK_PROXY_TOKEN) in Xcode Scheme Environment Variables."
                  : apiKeyErrorDetail)
         }
         .alert("Couldn't identify this food", isPresented: $showingManualFallback) {
@@ -66,7 +66,7 @@ struct AddFoodFlow: View {
     }
 
     private func analyzeImage(_ image: UIImage) async {
-        print("📷 analyzeImage called — apiKey empty: \(ClaudeVisionService.apiKey.isEmpty)")
+        print("📷 analyzeImage called — proxy URL set: \(!ClaudeVisionService.proxyURLString.isEmpty)")
         vm.isLoading = true
         do {
             let analysis = try await ClaudeVisionService.analyze(image: image)
@@ -74,8 +74,12 @@ struct AddFoodFlow: View {
             vm.populate(from: analysis)
             capturedPhotoPath = photoPath
             showingResult = true
+        } catch ClaudeVisionService.AnalysisError.invalidConfiguration(let detail) {
+            print("❌ Proxy configuration error: \(detail)")
+            apiKeyErrorDetail = detail
+            showingApiKeyError = true
         } catch ClaudeVisionService.AnalysisError.invalidApiKey(let detail) {
-            print("❌ Invalid API key: \(detail)")
+            print("❌ Invalid proxy token/API key: \(detail)")
             apiKeyErrorDetail = detail
             showingApiKeyError = true
         } catch {

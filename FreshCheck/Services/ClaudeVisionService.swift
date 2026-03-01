@@ -4,16 +4,15 @@ import UIKit
 
 final class ClaudeVisionService {
 
-    // Local dev: set ANTHROPIC_API_KEY in your Xcode Scheme environment variables.
-    static var apiKey: String {
-        let envKey = normalizedKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
-        return envKey
+    // Local dev: set FRESHCHECK_PROXY_URL in your Xcode Scheme environment variables.
+    // Example: https://freshcheck-proxy-production.up.railway.app
+    static var proxyURLString: String {
+        normalizedValue(ProcessInfo.processInfo.environment["FRESHCHECK_PROXY_URL"] ?? "")
     }
-    static var apiKeySource: String {
-        let envKey = normalizedKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
-        return isUsableAPIKey(envKey) ? "environment" : "unset"
+
+    static var proxyToken: String {
+        normalizedValue(ProcessInfo.processInfo.environment["FRESHCHECK_PROXY_TOKEN"] ?? "")
     }
-    static let endpoint = URL(string: "https://api.anthropic.com/v1/messages")!
 
     private static var prompt: String {
         let formatter = DateFormatter()
@@ -52,13 +51,13 @@ final class ClaudeVisionService {
         }
         let base64 = imageData.base64EncodedString()
         let body = buildRequestBody(base64Image: base64)
+        let endpoint = try resolvedEndpoint()
 
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
-        let key = try resolvedAPIKey()
-        print("🔑 Claude key source: \(apiKeySource), key: \(maskedKey(key))")
-        request.setValue(key, forHTTPHeaderField: "x-api-key")
-        request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
+        if !proxyToken.isEmpty {
+            request.setValue(proxyToken, forHTTPHeaderField: "x-client-token")
+        }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
@@ -72,10 +71,10 @@ final class ClaudeVisionService {
                 guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
                     let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
                     let responseBody = String(data: data, encoding: .utf8) ?? "no body"
-                    print("❌ Claude API error (attempt \(attempt)): \(statusCode) — \(responseBody)")
+                    print("❌ Proxy API error (attempt \(attempt)): \(statusCode) — \(responseBody)")
                     if statusCode == 401 {
                         throw AnalysisError.invalidApiKey(
-                            "Key source: \(apiKeySource), key: \(maskedKey(key)), server: \(responseBody)"
+                            "Proxy authentication failed. Check FRESHCHECK_PROXY_TOKEN. Server: \(responseBody)"
                         )
                     }
                     if [502, 503, 529].contains(statusCode) && attempt < 3 {
@@ -84,7 +83,7 @@ final class ClaudeVisionService {
                     }
                     throw AnalysisError.apiError
                 }
-                print("✅ Claude raw response: \(String(data: data, encoding: .utf8) ?? "unreadable")")
+                print("✅ Proxy raw response: \(String(data: data, encoding: .utf8) ?? "unreadable")")
 
                 var analysis = try parseResponse(data)
 
@@ -157,46 +156,25 @@ final class ClaudeVisionService {
     // MARK: - Private
 
     private static func buildRequestBody(base64Image: String) -> [String: Any] {
-        [
-            "model": "claude-haiku-4-5-20251001",
-            "max_tokens": 256,
-            "messages": [[
-                "role": "user",
-                "content": [
-                    ["type": "image", "source": [
-                        "type": "base64",
-                        "media_type": "image/jpeg",
-                        "data": base64Image
-                    ]],
-                    ["type": "text", "text": prompt]
-                ]
-            ]]
-        ]
+        ["imageBase64": base64Image, "prompt": prompt]
     }
 
-    private static func normalizedKey(_ raw: String) -> String {
+    private static func normalizedValue(_ raw: String) -> String {
         raw
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .trimmingCharacters(in: CharacterSet(charactersIn: "\"'"))
     }
 
-    private static func resolvedAPIKey() throws -> String {
-        let key = normalizedKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
-        guard isUsableAPIKey(key) else {
-            throw AnalysisError.invalidApiKey(
-                "Missing or invalid ANTHROPIC_API_KEY. Set it in Xcode: Product > Scheme > Edit Scheme > Run > Environment Variables."
+    private static func resolvedEndpoint() throws -> URL {
+        guard !proxyURLString.isEmpty else {
+            throw AnalysisError.invalidConfiguration(
+                "Missing FRESHCHECK_PROXY_URL. Set it in Xcode: Product > Scheme > Edit Scheme > Run > Environment Variables."
             )
         }
-        return key
-    }
-
-    private static func isUsableAPIKey(_ key: String) -> Bool {
-        guard !key.isEmpty else { return false }
-        guard key.hasPrefix("sk-ant-") else { return false }
-
-        let lower = key.lowercased()
-        let placeholders = ["your_", "replace", "example", "placeholder", "paste"]
-        return placeholders.allSatisfy { !lower.contains($0) }
+        guard let base = URL(string: proxyURLString) else {
+            throw AnalysisError.invalidConfiguration("Invalid FRESHCHECK_PROXY_URL: \(proxyURLString)")
+        }
+        return base.appending(path: "v1/food/analyze")
     }
 
     // Claude sometimes wraps JSON in markdown code fences. Extract the JSON object text.
@@ -223,15 +201,9 @@ final class ClaudeVisionService {
         return text
     }
 
-    private static func maskedKey(_ key: String) -> String {
-        guard key.count > 12 else { return "<too-short:\(key.count)>" }
-        let prefix = key.prefix(10)
-        let suffix = key.suffix(4)
-        return "\(prefix)...\(suffix) (len=\(key.count))"
-    }
-
     enum AnalysisError: Error {
         case imageEncodingFailed
+        case invalidConfiguration(String)
         case invalidApiKey(String)
         case invalidResponse(String)
         case apiError

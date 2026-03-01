@@ -28,6 +28,10 @@ enum AppTheme {
         static let wasted = Color(uiColor: .systemGray)
         static let destructive = Color.red
         static let cameraButton = Color.white
+        static let categoryMeats = Color.red
+        static let categoryVegetables = Color.green
+        static let categoryFruits = Color.orange
+        static let categoryOthers = Color(uiColor: .systemGray)
 
         /// Returns the color for a given `ItemStatus`.
         static func forStatus(_ status: ItemStatus) -> Color {
@@ -37,6 +41,15 @@ enum AppTheme {
             case .expired:      return expired
             case .consumed:     return consumed
             case .wasted:       return wasted
+            }
+        }
+
+        static func forDisplayCategory(_ category: FoodDisplayCategory) -> Color {
+            switch category {
+            case .meats: return categoryMeats
+            case .vegetables: return categoryVegetables
+            case .fruits: return categoryFruits
+            case .others: return categoryOthers
             }
         }
     }

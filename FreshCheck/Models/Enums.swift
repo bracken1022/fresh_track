@@ -15,6 +15,33 @@ enum FoodCategory: String, Codable, CaseIterable {
     }
 }
 
+enum FoodDisplayCategory: String, CaseIterable, Identifiable {
+    case meats
+    case vegetables
+    case fruits
+    case others
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .meats: return "Meats"
+        case .vegetables: return "Vegetables"
+        case .fruits: return "Fruits"
+        case .others: return "Others"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .meats: return "🥩"
+        case .vegetables: return "🥬"
+        case .fruits: return "🍎"
+        case .others: return "🍽️"
+        }
+    }
+}
+
 enum ConfidenceSource: String, Codable {
     case ocr, shelfLife
 }

@@ -23,9 +23,7 @@ struct FoodItemRow: View {
                 Text(item.name)
                     .font(AppTheme.Typography.headline)
                     .foregroundColor(AppTheme.Colors.textPrimary)
-                Text(item.category.rawValue.capitalized)
-                    .font(AppTheme.Typography.caption)
-                    .foregroundColor(AppTheme.Colors.textSecondary)
+                categoryBadge
             }
 
             Spacer()
@@ -36,6 +34,18 @@ struct FoodItemRow: View {
             }
         }
         .padding(.vertical, AppTheme.Spacing.xs)
+    }
+
+    private var categoryBadge: some View {
+        let display = item.displayCategory
+        let color = AppTheme.Colors.forDisplayCategory(display)
+        return Text("\(display.icon) \(display.title)")
+            .font(AppTheme.Typography.captionBold)
+            .foregroundColor(color)
+            .padding(.horizontal, AppTheme.Spacing.sm)
+            .padding(.vertical, AppTheme.Spacing.xs)
+            .background(color.opacity(0.14))
+            .clipShape(Capsule())
     }
 
     private var daysLabel: some View {

@@ -46,4 +46,23 @@ final class FoodItem {
         if daysRemaining <= 3 { return .expiringSoon }
         return .fresh
     }
+
+    var displayCategory: FoodDisplayCategory {
+        if category == .meat { return .meats }
+        if category == .produce {
+            return Self.isLikelyFruit(name: name) ? .fruits : .vegetables
+        }
+        return .others
+    }
+
+    private static func isLikelyFruit(name: String) -> Bool {
+        let normalized = name.lowercased()
+        let keywords = [
+            "apple", "banana", "orange", "grape", "mango", "pear", "peach", "plum",
+            "berry", "berries", "strawberry", "blueberry", "raspberry", "blackberry",
+            "kiwi", "melon", "watermelon", "pineapple", "papaya", "avocado", "cherry",
+            "lemon", "lime", "mandarin", "tangerine", "coconut", "fig", "date"
+        ]
+        return keywords.contains(where: normalized.contains)
+    }
 }
