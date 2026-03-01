@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+# Xcode build artifacts
+build/
+DerivedData/
+.derived/
+.derived_nested/
+*.moved-aside
+*.xcresult
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# CocoaPods / Carthage (if used later)
+Pods/
+Carthage/Build/
+
+# Fastlane artifacts
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Local config / secrets
+.env
+.env.*
+*.secret
+Secrets.plist
+GoogleService-Info.plist
+
+# Tooling
+.claude/
