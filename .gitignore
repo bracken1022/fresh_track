@@ -6,6 +6,9 @@ xcuserdata/
 *.xcuserstate
 *.xcscmblueprint
 
+# Xcode shared schemes (personal project)
+FreshCheck.xcodeproj/xcshareddata/xcschemes/
+
 # Xcode build artifacts
 build/
 DerivedData/

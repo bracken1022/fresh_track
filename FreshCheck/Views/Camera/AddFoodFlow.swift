@@ -41,7 +41,7 @@ struct AddFoodFlow: View {
             Button("OK", role: .cancel) { dismiss() }
         } message: {
             Text(apiKeyErrorDetail.isEmpty
-                 ? "The Anthropic API key is invalid. Please update it in ClaudeVisionService.swift."
+                 ? "Missing or invalid ANTHROPIC_API_KEY. Set it in Xcode Scheme Environment Variables."
                  : apiKeyErrorDetail)
         }
         .alert("Couldn't identify this food", isPresented: $showingManualFallback) {

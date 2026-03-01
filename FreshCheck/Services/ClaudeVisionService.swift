@@ -4,17 +4,14 @@ import UIKit
 
 final class ClaudeVisionService {
 
-    // Paste your Anthropic API key here for device testing.
-    // For production, load from a secure config or backend proxy.
-    private static let hardcodedKey = ""
+    // Local dev: set ANTHROPIC_API_KEY in your Xcode Scheme environment variables.
     static var apiKey: String {
         let envKey = normalizedKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
-        let fallback = normalizedKey(hardcodedKey)
-        return isUsableAPIKey(envKey) ? envKey : fallback
+        return envKey
     }
     static var apiKeySource: String {
         let envKey = normalizedKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
-        return isUsableAPIKey(envKey) ? "environment" : "hardcoded"
+        return isUsableAPIKey(envKey) ? "environment" : "unset"
     }
     static let endpoint = URL(string: "https://api.anthropic.com/v1/messages")!
 
@@ -58,7 +55,7 @@ final class ClaudeVisionService {
 
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
-        let key = apiKey
+        let key = try resolvedAPIKey()
         print("🔑 Claude key source: \(apiKeySource), key: \(maskedKey(key))")
         request.setValue(key, forHTTPHeaderField: "x-api-key")
         request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
@@ -161,7 +158,7 @@ final class ClaudeVisionService {
 
     private static func buildRequestBody(base64Image: String) -> [String: Any] {
         [
-            "model": "claude-sonnet-4-6",
+            "model": "claude-haiku-4-5-20251001",
             "max_tokens": 256,
             "messages": [[
                 "role": "user",
@@ -181,6 +178,16 @@ final class ClaudeVisionService {
         raw
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .trimmingCharacters(in: CharacterSet(charactersIn: "\"'"))
+    }
+
+    private static func resolvedAPIKey() throws -> String {
+        let key = normalizedKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
+        guard isUsableAPIKey(key) else {
+            throw AnalysisError.invalidApiKey(
+                "Missing or invalid ANTHROPIC_API_KEY. Set it in Xcode: Product > Scheme > Edit Scheme > Run > Environment Variables."
+            )
+        }
+        return key
     }
 
     private static func isUsableAPIKey(_ key: String) -> Bool {
