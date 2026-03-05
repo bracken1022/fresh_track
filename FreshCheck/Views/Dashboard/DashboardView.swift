@@ -37,6 +37,7 @@ struct DashboardView: View {
     @Environment(\.modelContext) private var context
     @State private var showingAddFood = false
     @State private var selectedFilter: CategoryFilter = .all
+    @AppStorage(L10n.appLanguageStorageKey) private var appLanguageRawValue: String = AppLanguage.system.rawValue
 
     private var activeItems: [FoodItem] {
         items.filter { $0.status != .consumed && $0.status != .wasted }
@@ -97,6 +98,9 @@ struct DashboardView: View {
             }
             .navigationTitle(L10n.tr("dashboard.title"))
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    languageMenu
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddFood = true
@@ -117,6 +121,24 @@ struct DashboardView: View {
                     )
                 }
             }
+        }
+    }
+
+    private var languageMenu: some View {
+        Menu {
+            ForEach(AppLanguage.allCases) { language in
+                Button {
+                    appLanguageRawValue = language.rawValue
+                } label: {
+                    if appLanguageRawValue == language.rawValue {
+                        Label(language.displayName, systemImage: "checkmark")
+                    } else {
+                        Text(language.displayName)
+                    }
+                }
+            }
+        } label: {
+            Image(systemName: "globe")
         }
     }
 
