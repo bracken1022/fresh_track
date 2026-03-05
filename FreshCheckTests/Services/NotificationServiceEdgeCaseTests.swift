@@ -6,9 +6,13 @@ final class NotificationServiceEdgeCaseTests: XCTestCase {
     // MARK: - Message truncation at 5 items
 
     func test_buildDigestMessage_showsAllFiveItems_whenExactlyFiveExpiring() {
-        let items = (1...5).map { i in
-            makeFoodItem(name: "Item\(i)", daysUntilExpiry: i)
-        }
+        let items = [
+            makeFoodItem(name: "Item1", daysUntilExpiry: 0),
+            makeFoodItem(name: "Item2", daysUntilExpiry: 1),
+            makeFoodItem(name: "Item3", daysUntilExpiry: 2),
+            makeFoodItem(name: "Item4", daysUntilExpiry: -1),
+            makeFoodItem(name: "Item5", daysUntilExpiry: -2),
+        ]
         let message = NotificationService.buildDigestMessage(for: items)
         XCTAssertNotNil(message)
         // All 5 should appear in the message
@@ -21,9 +25,14 @@ final class NotificationServiceEdgeCaseTests: XCTestCase {
     }
 
     func test_buildDigestMessage_onlyShowsFirstFive_whenSixExpiring() {
-        let items = (1...6).map { i in
-            makeFoodItem(name: "Food\(i)", daysUntilExpiry: i <= 6 ? i : 10)
-        }
+        let items = [
+            makeFoodItem(name: "Food1", daysUntilExpiry: 0),
+            makeFoodItem(name: "Food2", daysUntilExpiry: 1),
+            makeFoodItem(name: "Food3", daysUntilExpiry: 2),
+            makeFoodItem(name: "Food4", daysUntilExpiry: -1),
+            makeFoodItem(name: "Food5", daysUntilExpiry: -2),
+            makeFoodItem(name: "Food6", daysUntilExpiry: -3),
+        ]
         let message = NotificationService.buildDigestMessage(for: items)
         XCTAssertNotNil(message)
         // First 5 should appear

@@ -8,7 +8,7 @@ final class NotificationServiceTests: XCTestCase {
         let items = [
             makeFoodItem(name: "Broccoli", daysUntilExpiry: 1),
             makeFoodItem(name: "Milk", daysUntilExpiry: 2),
-            makeFoodItem(name: "Apple", daysUntilExpiry: 10),  // not expiring soon
+            makeFoodItem(name: "Apple", daysUntilExpiry: 3),  // outside 2-day rule
         ]
         let message = NotificationService.buildDigestMessage(for: items)
         XCTAssertTrue(message!.contains("Broccoli"))
