@@ -1,0 +1,59 @@
+"tab.fridge" = "Fridge";
+"tab.stats" = "Stats";
+
+"dashboard.title" = "My Fridge";
+"dashboard.empty.title" = "Fridge is empty";
+"dashboard.empty.desc" = "Tap the camera icon to add food.";
+"dashboard.action.wasted" = "Wasted";
+"dashboard.action.consumed" = "Consumed";
+"dashboard.filter.all" = "All";
+"dashboard.filter.meats" = "Meats";
+"dashboard.filter.vegetables" = "Vegetables";
+"dashboard.filter.fruits" = "Fruits";
+"dashboard.filter.others" = "Others";
+
+"category.meats" = "Meats";
+"category.vegetables" = "Vegetables";
+"category.fruits" = "Fruits";
+"category.others" = "Others";
+"foodCategory.produce" = "Produce";
+"foodCategory.meat" = "Meat";
+"foodCategory.dairy" = "Dairy";
+"foodCategory.packaged" = "Packaged";
+"foodCategory.other" = "Other";
+
+"camera.loading" = "Analyzing your food...";
+"camera.opening" = "Opening camera...";
+"camera.addFood" = "Add Food";
+"camera.service.error.title" = "Service Setup Error";
+"camera.service.error.default" = "Missing proxy configuration. Set FRESHCHECK_PROXY_URL (and optional FRESHCHECK_PROXY_TOKEN) in Xcode Scheme Environment Variables.";
+"camera.manual.title" = "Couldn't identify this food";
+"camera.manual.desc" = "Please enter the food name manually.";
+"camera.field.foodName" = "Food name";
+"common.add" = "Add";
+"common.cancel" = "Cancel";
+"common.ok" = "OK";
+
+"analysis.title" = "Confirm Food Item";
+"analysis.section.detected" = "Detected Food";
+"analysis.section.expiry" = "Expiry Date";
+"analysis.field.category" = "Category";
+"analysis.field.expires" = "Expires";
+"analysis.source.ocr" = "Read from package";
+"analysis.source.ai" = "AI estimate";
+"analysis.warning.expired" = "This item may already be expired.";
+
+"status.expired" = "Expired";
+"status.today" = "Today";
+"status.fresh" = "Fresh";
+"status.expiringSoonShort" = "Exp. Soon";
+
+"stats.title" = "Waste Stats";
+"stats.section.month" = "This Month";
+"stats.section.byCategory" = "Wasted by Category";
+"stats.logged" = "Logged";
+"stats.consumed" = "Consumed";
+"stats.wasted" = "Wasted";
+"stats.wasteRate" = "Waste rate";
+"stats.chart.category" = "Category";
+"stats.chart.count" = "Count";

@@ -18,7 +18,8 @@ Request body for `/v1/food/analyze`:
 ```json
 {
   "imageBase64": "<jpeg base64>",
-  "prompt": "..."
+  "prompt": "...",
+  "language": "en|zh"
 }
 ```
 

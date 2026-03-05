@@ -8,12 +8,13 @@
 
 /* Begin PBXFileReference section */
 		D62234E62F53BA7A00FA37E7 /* FreshCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D622366E2F53C05F00FA37E7 /* FreshCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FreshCheck.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D62234E82F53BA7A00FA37E7 /* FreshCheck */ = {
+		D62234E82F53BA7A00FA37E7 /* . */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ".";
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +33,7 @@
 		D62234DD2F53BA7A00FA37E7 = {
 			isa = PBXGroup;
 			children = (
-				D62234E82F53BA7A00FA37E7 /* FreshCheck */,
+				D62234E82F53BA7A00FA37E7 /* . */,
 				D62234E72F53BA7A00FA37E7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -42,6 +43,11 @@
 			children = (
 				D62234E62F53BA7A00FA37E7 /* FreshCheck.app */,
 			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D62236702F53C05F00FA37E7 /* Products */ = {
+			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -61,7 +67,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				D62234E82F53BA7A00FA37E7 /* FreshCheck */,
+				D62234E82F53BA7A00FA37E7 /* . */,
 			);
 			name = FreshCheck;
 			packageProductDependencies = (
@@ -91,12 +97,19 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = D62234DD2F53BA7A00FA37E7;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D62234E72F53BA7A00FA37E7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D62236702F53C05F00FA37E7 /* Products */;
+					ProjectRef = D622366E2F53C05F00FA37E7 /* FreshCheck.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D62234E52F53BA7A00FA37E7 /* FreshCheck */,

@@ -14,11 +14,11 @@ struct DashboardView: View {
 
         var title: String {
             switch self {
-            case .all: return "All"
-            case .meats: return "Meats"
-            case .vegetables: return "Vegetables"
-            case .fruits: return "Fruits"
-            case .others: return "Others"
+            case .all: return L10n.tr("dashboard.filter.all")
+            case .meats: return L10n.tr("dashboard.filter.meats")
+            case .vegetables: return L10n.tr("dashboard.filter.vegetables")
+            case .fruits: return L10n.tr("dashboard.filter.fruits")
+            case .others: return L10n.tr("dashboard.filter.others")
             }
         }
 
@@ -75,11 +75,11 @@ struct DashboardView: View {
                             ForEach(group.items) { item in
                                 FoodItemRow(item: item)
                                     .swipeActions(edge: .trailing) {
-                                        Button("Wasted", role: .destructive) {
+                                        Button(L10n.tr("dashboard.action.wasted"), role: .destructive) {
                                             dispose(item, outcome: .wasted)
                                         }
                                         .tint(AppTheme.Colors.wasted)
-                                        Button("Consumed") {
+                                        Button(L10n.tr("dashboard.action.consumed")) {
                                             dispose(item, outcome: .consumed)
                                         }
                                         .tint(AppTheme.Colors.consumed)
@@ -95,7 +95,7 @@ struct DashboardView: View {
                 }
                 .listStyle(.insetGrouped)
             }
-            .navigationTitle("My Fridge")
+            .navigationTitle(L10n.tr("dashboard.title"))
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
@@ -111,9 +111,9 @@ struct DashboardView: View {
             .overlay {
                 if filteredItems.isEmpty {
                     ContentUnavailableView(
-                        "Fridge is empty",
+                        L10n.tr("dashboard.empty.title"),
                         systemImage: AppTheme.Icons.fridgeTab,
-                        description: Text("Tap the camera icon to add food.")
+                        description: Text(L10n.tr("dashboard.empty.desc"))
                     )
                 }
             }

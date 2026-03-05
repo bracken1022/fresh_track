@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		D62234E62F53BA7A00FA37E7 /* FreshCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D622363D2F53C04B00FA37E7 /* FreshCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FreshCheck.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -41,6 +42,13 @@
 			isa = PBXGroup;
 			children = (
 				D62234E62F53BA7A00FA37E7 /* FreshCheck.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D622363F2F53C04B00FA37E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,12 +99,19 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = D62234DD2F53BA7A00FA37E7;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D62234E72F53BA7A00FA37E7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D622363F2F53C04B00FA37E7 /* Products */;
+					ProjectRef = D622363D2F53C04B00FA37E7 /* FreshCheck.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D62234E52F53BA7A00FA37E7 /* FreshCheck */,

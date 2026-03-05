@@ -46,7 +46,7 @@ final class ClaudeVisionService {
 
     static func analyze(image: UIImage) async throws -> FoodAnalysis {
         let resized = resizeImage(image, maxDimension: 1024)
-        guard let imageData = resized.jpegData(compressionQuality: 0.8) else {
+        guard let imageData = resized.jpegData(compressionQuality     : 0.8) else {
             throw AnalysisError.imageEncodingFailed
         }
         let base64 = imageData.base64EncodedString()
@@ -156,7 +156,7 @@ final class ClaudeVisionService {
     // MARK: - Private
 
     private static func buildRequestBody(base64Image: String) -> [String: Any] {
-        ["imageBase64": base64Image, "prompt": prompt]
+        ["imageBase64": base64Image, "prompt": prompt, "language": L10n.aiLanguageCode]
     }
 
     private static func normalizedValue(_ raw: String) -> String {

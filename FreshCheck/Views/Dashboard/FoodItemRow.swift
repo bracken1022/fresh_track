@@ -50,7 +50,7 @@ struct FoodItemRow: View {
 
     private var daysLabel: some View {
         let days = item.daysRemaining
-        let text = days < 0 ? "Expired" : days == 0 ? "Today" : "\(days)d"
+        let text = days < 0 ? L10n.tr("status.expired") : days == 0 ? L10n.tr("status.today") : "\(days)d"
         return Text(text)
             .font(AppTheme.Typography.captionBold)
             .foregroundColor(AppTheme.Colors.forStatus(item.status))
@@ -59,9 +59,9 @@ struct FoodItemRow: View {
     private var statusBadge: some View {
         let color = AppTheme.Colors.forStatus(item.status)
         let statusText: String = switch item.status {
-            case .fresh: "Fresh"
-            case .expiringSoon: "Exp. Soon"
-            case .expired: "Expired"
+            case .fresh: L10n.tr("status.fresh")
+            case .expiringSoon: L10n.tr("status.expiringSoonShort")
+            case .expired: L10n.tr("status.expired")
             default: ""
         }
         return Text(statusText)

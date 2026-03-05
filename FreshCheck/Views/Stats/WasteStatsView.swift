@@ -14,24 +14,24 @@ struct WasteStatsView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("This Month") {
+                Section(L10n.tr("stats.section.month")) {
                     HStack {
-                        statTile(title: "Logged", value: thisMonth.count)
-                        statTile(title: "Consumed", value: thisMonth.filter { $0.outcome == .consumed }.count)
-                        statTile(title: "Wasted", value: thisMonth.filter { $0.outcome == .wasted }.count)
+                        statTile(title: L10n.tr("stats.logged"), value: thisMonth.count)
+                        statTile(title: L10n.tr("stats.consumed"), value: thisMonth.filter { $0.outcome == .consumed }.count)
+                        statTile(title: L10n.tr("stats.wasted"), value: thisMonth.filter { $0.outcome == .wasted }.count)
                     }
                     let pct = WasteStatsCalculator.wastePercentage(from: thisMonth)
-                    Text("Waste rate: \(Int(pct))%")
+                    Text("\(L10n.tr("stats.wasteRate")): \(Int(pct))%")
                         .font(AppTheme.Typography.headline)
                         .foregroundColor(pct > 30 ? AppTheme.Colors.expired : pct > 15 ? AppTheme.Colors.expiringSoon : AppTheme.Colors.fresh)
                 }
 
-                Section("Wasted by Category") {
+                Section(L10n.tr("stats.section.byCategory")) {
                     let counts = WasteStatsCalculator.wastedCountByCategory(from: thisMonth)
                     Chart(FoodCategory.allCases, id: \.self) { category in
                         BarMark(
-                            x: .value("Category", category.rawValue.capitalized),
-                            y: .value("Count", counts[category] ?? 0)
+                            x: .value(L10n.tr("stats.chart.category"), category.localizedName),
+                            y: .value(L10n.tr("stats.chart.count"), counts[category] ?? 0)
                         )
                         .foregroundStyle(AppTheme.Colors.expired.opacity(0.7))
                     }
@@ -40,7 +40,7 @@ struct WasteStatsView: View {
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Waste Stats")
+            .navigationTitle(L10n.tr("stats.title"))
         }
     }
 

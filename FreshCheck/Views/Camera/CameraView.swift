@@ -10,7 +10,7 @@ struct CameraView: View {
         Button {
             showingPicker = true
         } label: {
-            Label("Add Food", systemImage: AppTheme.Icons.cameraTab)
+            Label(L10n.tr("camera.addFood"), systemImage: AppTheme.Icons.cameraTab)
                 .font(AppTheme.Typography.headline)
                 .padding()
                 .background(AppTheme.Colors.accent)

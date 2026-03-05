@@ -1,0 +1,59 @@
+"tab.fridge" = "冰箱";
+"tab.stats" = "统计";
+
+"dashboard.title" = "我的冰箱";
+"dashboard.empty.title" = "冰箱是空的";
+"dashboard.empty.desc" = "点击相机图标添加食物。";
+"dashboard.action.wasted" = "已浪费";
+"dashboard.action.consumed" = "已食用";
+"dashboard.filter.all" = "全部";
+"dashboard.filter.meats" = "肉类";
+"dashboard.filter.vegetables" = "蔬菜";
+"dashboard.filter.fruits" = "水果";
+"dashboard.filter.others" = "其他";
+
+"category.meats" = "肉类";
+"category.vegetables" = "蔬菜";
+"category.fruits" = "水果";
+"category.others" = "其他";
+"foodCategory.produce" = "生鲜蔬果";
+"foodCategory.meat" = "肉类";
+"foodCategory.dairy" = "乳制品";
+"foodCategory.packaged" = "包装食品";
+"foodCategory.other" = "其他";
+
+"camera.loading" = "正在分析食物...";
+"camera.opening" = "正在打开相机...";
+"camera.addFood" = "添加食物";
+"camera.service.error.title" = "服务配置错误";
+"camera.service.error.default" = "缺少代理配置。请在 Xcode Scheme 环境变量中设置 FRESHCHECK_PROXY_URL（可选 FRESHCHECK_PROXY_TOKEN）。";
+"camera.manual.title" = "无法识别该食物";
+"camera.manual.desc" = "请手动输入食物名称。";
+"camera.field.foodName" = "食物名称";
+"common.add" = "添加";
+"common.cancel" = "取消";
+"common.ok" = "确定";
+
+"analysis.title" = "确认食物信息";
+"analysis.section.detected" = "识别结果";
+"analysis.section.expiry" = "过期日期";
+"analysis.field.category" = "类别";
+"analysis.field.expires" = "到期";
+"analysis.source.ocr" = "从包装读取";
+"analysis.source.ai" = "AI 估算";
+"analysis.warning.expired" = "该食物可能已经过期。";
+
+"status.expired" = "已过期";
+"status.today" = "今天";
+"status.fresh" = "新鲜";
+"status.expiringSoonShort" = "即将过期";
+
+"stats.title" = "浪费统计";
+"stats.section.month" = "本月";
+"stats.section.byCategory" = "按类别统计浪费";
+"stats.logged" = "记录数";
+"stats.consumed" = "已食用";
+"stats.wasted" = "已浪费";
+"stats.wasteRate" = "浪费率";
+"stats.chart.category" = "类别";
+"stats.chart.count" = "数量";

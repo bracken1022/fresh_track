@@ -25,7 +25,8 @@ const reqSchema = z
           return false;
         }
       }, "imageBase64 is invalid or too large"),
-    prompt: z.string().trim().min(1).max(20_000)
+    prompt: z.string().trim().min(1).max(20_000),
+    language: z.enum(["en", "zh"]).optional()
   })
   .strict();
 
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const apiKey = (process.env.ANTHROPIC_API_KEY || "").trim();
+    const apiKey = normalizeEnv(process.env.ANTHROPIC_API_KEY);
     if (!apiKey.startsWith("sk-ant-")) {
       return NextResponse.json(
         { error: "server_misconfigured", message: "Missing or invalid ANTHROPIC_API_KEY" },
@@ -61,6 +62,7 @@ export async function POST(req: NextRequest) {
     }
 
     const model = (process.env.ANTHROPIC_MODEL || "claude-haiku-4-5-20251001").trim();
+    const prompt = localizedPrompt(parsedReq.data.prompt, parsedReq.data.language || "en");
     const upstreamResp = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -83,7 +85,7 @@ export async function POST(req: NextRequest) {
                   data: parsedReq.data.imageBase64
                 }
               },
-              { type: "text", text: parsedReq.data.prompt }
+              { type: "text", text: prompt }
             ]
           }
         ]
@@ -146,7 +148,7 @@ export async function POST(req: NextRequest) {
 }
 
 function hasValidClientToken(req: NextRequest): boolean {
-  const expected = (process.env.APP_CLIENT_TOKEN || "").trim();
+  const expected = normalizeEnv(process.env.APP_CLIENT_TOKEN);
   if (!expected) return true;
 
   const incoming = (req.headers.get("x-client-token") || "").trim();
@@ -156,4 +158,32 @@ function hasValidClientToken(req: NextRequest): boolean {
   const right = Buffer.from(expected);
   if (left.length !== right.length) return false;
   return crypto.timingSafeEqual(left, right);
+}
+
+function normalizeEnv(value: string | undefined): string {
+  return String(value || "")
+    .trim()
+    .replace(/^['"]+|['"]+$/g, "");
+}
+
+function localizedPrompt(basePrompt: string, language: "en" | "zh"): string {
+  if (language === "zh") {
+    return `${basePrompt}
+
+Additional output rules:
+- Use Simplified Chinese for natural language values (for example "name").
+- Keep JSON keys exactly as required.
+- Keep enum values in English exactly:
+  category: produce | meat | dairy | packaged | other
+  confidenceSource: ocr | shelfLife`;
+  }
+
+  return `${basePrompt}
+
+Additional output rules:
+- Use English for natural language values.
+- Keep JSON keys exactly as required.
+- Keep enum values exactly:
+  category: produce | meat | dairy | packaged | other
+  confidenceSource: ocr | shelfLife`;
 }

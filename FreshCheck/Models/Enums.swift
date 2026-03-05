@@ -13,6 +13,16 @@ enum FoodCategory: String, Codable, CaseIterable {
         case .other:    return "🍽️"
         }
     }
+
+    var localizedName: String {
+        switch self {
+        case .produce: return L10n.tr("foodCategory.produce")
+        case .meat: return L10n.tr("foodCategory.meat")
+        case .dairy: return L10n.tr("foodCategory.dairy")
+        case .packaged: return L10n.tr("foodCategory.packaged")
+        case .other: return L10n.tr("foodCategory.other")
+        }
+    }
 }
 
 enum FoodDisplayCategory: String, CaseIterable, Identifiable {
@@ -25,10 +35,10 @@ enum FoodDisplayCategory: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .meats: return "Meats"
-        case .vegetables: return "Vegetables"
-        case .fruits: return "Fruits"
-        case .others: return "Others"
+        case .meats: return L10n.tr("category.meats")
+        case .vegetables: return L10n.tr("category.vegetables")
+        case .fruits: return L10n.tr("category.fruits")
+        case .others: return L10n.tr("category.others")
         }
     }
 

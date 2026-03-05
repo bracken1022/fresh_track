@@ -17,7 +17,7 @@ struct AddFoodFlow: View {
     var body: some View {
         Group {
             if vm.isLoading {
-                ProgressView("Analyzing your food...")
+                ProgressView(L10n.tr("camera.loading"))
                     .padding(AppTheme.Spacing.lg)
             } else if showingResult {
                 AnalysisResultView(vm: vm) {
@@ -37,19 +37,19 @@ struct AddFoodFlow: View {
             guard let image else { return }
             Task { await analyzeImage(image) }
         }
-        .alert("Service Setup Error", isPresented: $showingApiKeyError) {
-            Button("OK", role: .cancel) { dismiss() }
+        .alert(L10n.tr("camera.service.error.title"), isPresented: $showingApiKeyError) {
+            Button(L10n.tr("common.ok"), role: .cancel) { dismiss() }
         } message: {
             Text(apiKeyErrorDetail.isEmpty
-                 ? "Missing proxy configuration. Set FRESHCHECK_PROXY_URL (and optional FRESHCHECK_PROXY_TOKEN) in Xcode Scheme Environment Variables."
+                 ? L10n.tr("camera.service.error.default")
                  : apiKeyErrorDetail)
         }
-        .alert("Couldn't identify this food", isPresented: $showingManualFallback) {
-            TextField("Food name", text: $vm.name)
-            Button("Add") { showingResult = true }
-            Button("Cancel", role: .cancel) { dismiss() }
+        .alert(L10n.tr("camera.manual.title"), isPresented: $showingManualFallback) {
+            TextField(L10n.tr("camera.field.foodName"), text: $vm.name)
+            Button(L10n.tr("common.add")) { showingResult = true }
+            Button(L10n.tr("common.cancel"), role: .cancel) { dismiss() }
         } message: {
-            Text("Please enter the food name manually.")
+            Text(L10n.tr("camera.manual.desc"))
         }
         .onAppear { showingCamera = true }
     }
@@ -59,7 +59,7 @@ struct AddFoodFlow: View {
             Image(systemName: AppTheme.Icons.cameraTab)
                 .font(.largeTitle)
                 .foregroundColor(AppTheme.Colors.textSecondary)
-            Text("Opening camera...")
+            Text(L10n.tr("camera.opening"))
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.textSecondary)
         }

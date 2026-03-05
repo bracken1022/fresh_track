@@ -9,24 +9,24 @@ struct AnalysisResultView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Detected Food") {
+                Section(L10n.tr("analysis.section.detected")) {
                     HStack {
                         Text(vm.category.icon).font(.largeTitle)
-                        TextField("Food name", text: $vm.name)
+                        TextField(L10n.tr("camera.field.foodName"), text: $vm.name)
                     }
-                    Picker("Category", selection: $vm.category) {
+                    Picker(L10n.tr("analysis.field.category"), selection: $vm.category) {
                         ForEach(FoodCategory.allCases, id: \.self) { cat in
-                            Text("\(cat.icon) \(cat.rawValue.capitalized)").tag(cat)
+                            Text("\(cat.icon) \(cat.localizedName)").tag(cat)
                         }
                     }
                 }
 
-                Section("Expiry Date") {
-                    DatePicker("Expires", selection: $vm.expiryDate, displayedComponents: .date)
+                Section(L10n.tr("analysis.section.expiry")) {
+                    DatePicker(L10n.tr("analysis.field.expires"), selection: $vm.expiryDate, displayedComponents: .date)
                     HStack(spacing: AppTheme.Spacing.xs) {
                         Image(systemName: vm.confidenceSource == .ocr ? AppTheme.Icons.ocrSource : AppTheme.Icons.aiSource)
                             .foregroundColor(AppTheme.Colors.textSecondary)
-                        Text(vm.confidenceSource == .ocr ? "Read from package" : "AI estimate")
+                        Text(vm.confidenceSource == .ocr ? L10n.tr("analysis.source.ocr") : L10n.tr("analysis.source.ai"))
                             .font(AppTheme.Typography.caption)
                             .foregroundColor(AppTheme.Colors.textSecondary)
                     }
@@ -34,18 +34,18 @@ struct AnalysisResultView: View {
 
                 if vm.isExpiredOnAdd {
                     Section {
-                        Label("This item may already be expired.", systemImage: AppTheme.Icons.expiringStatus)
+                        Label(L10n.tr("analysis.warning.expired"), systemImage: AppTheme.Icons.expiringStatus)
                             .foregroundColor(AppTheme.Colors.expiringSoon)
                     }
                 }
             }
-            .navigationTitle("Confirm Food Item")
+            .navigationTitle(L10n.tr("analysis.title"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: onCancel)
+                    Button(L10n.tr("common.cancel"), action: onCancel)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add", action: onConfirm)
+                    Button(L10n.tr("common.add"), action: onConfirm)
                         .disabled(vm.name.isEmpty)
                 }
             }
