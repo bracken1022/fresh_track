@@ -16,7 +16,7 @@ struct ContentView: View {
         .task {
             let granted = await NotificationService.requestPermission()
             if granted {
-                NotificationService.scheduleDailyDigest(items: items)
+                NotificationService.scheduleUsingSavedTime(items: items)
             }
         }
     }

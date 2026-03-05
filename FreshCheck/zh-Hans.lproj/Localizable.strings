@@ -57,3 +57,8 @@
 "stats.wasteRate" = "浪费率";
 "stats.chart.category" = "类别";
 "stats.chart.count" = "数量";
+
+"notif.settings.title" = "提醒时间";
+"notif.quickSet.title" = "快速设置";
+"notif.timePicker.title" = "每日提醒";
+"notif.timePicker.label" = "时间";

@@ -57,3 +57,8 @@
 "stats.wasteRate" = "Waste rate";
 "stats.chart.category" = "Category";
 "stats.chart.count" = "Count";
+
+"notif.settings.title" = "Reminder Time";
+"notif.quickSet.title" = "Quick Set";
+"notif.timePicker.title" = "Daily Reminder";
+"notif.timePicker.label" = "Time";

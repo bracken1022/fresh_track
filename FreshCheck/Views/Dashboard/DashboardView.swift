@@ -36,6 +36,7 @@ struct DashboardView: View {
     @Query(sort: \FoodItem.expiryDate) private var items: [FoodItem]
     @Environment(\.modelContext) private var context
     @State private var showingAddFood = false
+    @State private var showingReminderSettings = false
     @State private var selectedFilter: CategoryFilter = .all
     @AppStorage(L10n.appLanguageStorageKey) private var appLanguageRawValue: String = AppLanguage.system.rawValue
 
@@ -101,6 +102,13 @@ struct DashboardView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     languageMenu
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showingReminderSettings = true
+                    } label: {
+                        Image(systemName: "bell.badge")
+                    }
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddFood = true
@@ -111,6 +119,9 @@ struct DashboardView: View {
             }
             .sheet(isPresented: $showingAddFood) {
                 AddFoodFlow()
+            }
+            .sheet(isPresented: $showingReminderSettings) {
+                NotificationSettingsView()
             }
             .overlay {
                 if filteredItems.isEmpty {
