@@ -26,7 +26,7 @@
 "camera.opening" = "Opening camera...";
 "camera.addFood" = "Add Food";
 "camera.service.error.title" = "Service Setup Error";
-"camera.service.error.default" = "Missing proxy configuration. Set FRESHCHECK_PROXY_URL (and optional FRESHCHECK_PROXY_TOKEN) in Xcode Scheme Environment Variables.";
+"camera.service.error.default" = "Missing proxy configuration. Set FRESHCHECK_PROXY_URL (and optional FRESHCHECK_PROXY_TOKEN) in target Build Settings so they are included in Info.plist.";
 "camera.manual.title" = "Couldn't identify this food";
 "camera.manual.desc" = "Please enter the food name manually.";
 "camera.field.foodName" = "Food name";

@@ -28,16 +28,16 @@ final class NotificationService {
         defaults.set(minute, forKey: reminderMinuteKey)
     }
 
-    static func scheduleUsingSavedTime(items: [FoodItem]) {
+    static func scheduleUsingSavedTime(message: String?) {
         let saved = currentReminderTime()
-        scheduleDailyDigest(hour: saved.hour, minute: saved.minute, items: items)
+        scheduleDailyDigest(hour: saved.hour, minute: saved.minute, message: message)
     }
 
-    static func scheduleDailyDigest(hour: Int = defaultReminderHour, minute: Int = defaultReminderMinute, items: [FoodItem]) {
+    static func scheduleDailyDigest(hour: Int = defaultReminderHour, minute: Int = defaultReminderMinute, message: String?) {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: ["daily-digest"])
 
-        guard let message = buildDigestMessage(for: items) else { return }
+        guard let message, !message.isEmpty else { return }
 
         let content = UNMutableNotificationContent()
         content.title = "Fridge Check"

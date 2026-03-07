@@ -67,10 +67,15 @@ npm run dev
 
 ## iOS app config
 
-In Xcode `Product > Scheme > Edit Scheme > Run > Environment Variables`:
+For App Store builds, configure these in target **Build Settings** (not only Scheme env vars):
 
 - `FRESHCHECK_PROXY_URL` = your Railway URL
 - `FRESHCHECK_PROXY_TOKEN` = same as backend `APP_CLIENT_TOKEN` (if set)
+
+Path: Target `FreshCheck` -> Build Settings -> search `FRESHCHECK_PROXY`.
+These values are injected into `Info.plist` as `FRESHCHECK_PROXY_URL` / `FRESHCHECK_PROXY_TOKEN`.
+
+Scheme environment variables are only a debug fallback when running from Xcode.
 
 The iOS app calls:
 

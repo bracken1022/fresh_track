@@ -4,14 +4,18 @@ import UIKit
 
 final class ClaudeVisionService {
 
-    // Local dev: set FRESHCHECK_PROXY_URL in your Xcode Scheme environment variables.
-    // Example: https://freshcheck-proxy-production.up.railway.app
+    // App Store build source: Info.plist keys.
+    // Debug fallback: Xcode Scheme environment variables.
     static var proxyURLString: String {
-        normalizedValue(ProcessInfo.processInfo.environment["FRESHCHECK_PROXY_URL"] ?? "")
+        let plistValue = normalizedValue(Bundle.main.object(forInfoDictionaryKey: "FRESHCHECK_PROXY_URL") as? String ?? "")
+        if !plistValue.isEmpty { return plistValue }
+        return normalizedValue(ProcessInfo.processInfo.environment["FRESHCHECK_PROXY_URL"] ?? "")
     }
 
     static var proxyToken: String {
-        normalizedValue(ProcessInfo.processInfo.environment["FRESHCHECK_PROXY_TOKEN"] ?? "")
+        let plistValue = normalizedValue(Bundle.main.object(forInfoDictionaryKey: "FRESHCHECK_PROXY_TOKEN") as? String ?? "")
+        if !plistValue.isEmpty { return plistValue }
+        return normalizedValue(ProcessInfo.processInfo.environment["FRESHCHECK_PROXY_TOKEN"] ?? "")
     }
 
     private static var prompt: String {
@@ -168,7 +172,7 @@ final class ClaudeVisionService {
     private static func resolvedEndpoint() throws -> URL {
         guard !proxyURLString.isEmpty else {
             throw AnalysisError.invalidConfiguration(
-                "Missing FRESHCHECK_PROXY_URL. Set it in Xcode: Product > Scheme > Edit Scheme > Run > Environment Variables."
+                "Missing FRESHCHECK_PROXY_URL in app configuration. Set Info.plist key FRESHCHECK_PROXY_URL."
             )
         }
         guard let base = URL(string: proxyURLString) else {

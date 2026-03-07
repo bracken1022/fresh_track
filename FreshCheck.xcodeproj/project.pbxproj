@@ -9,6 +9,7 @@
 /* Begin PBXFileReference section */
 		D62234E62F53BA7A00FA37E7 /* FreshCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D622363D2F53C04B00FA37E7 /* FreshCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FreshCheck.xcodeproj; sourceTree = "<group>"; };
+		D62236C02F5BE5DA00FA37E7 /* FreshCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FreshCheck.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -47,6 +48,13 @@
 			sourceTree = "<group>";
 		};
 		D622363F2F53C04B00FA37E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D62236C32F5BE5DA00FA37E7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -107,6 +115,10 @@
 			productRefGroup = D62234E72F53BA7A00FA37E7 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = D62236C32F5BE5DA00FA37E7 /* Products */;
+					ProjectRef = D62236C02F5BE5DA00FA37E7 /* FreshCheck.xcodeproj */;
+				},
 				{
 					ProductGroup = D622363F2F53C04B00FA37E7 /* Products */;
 					ProjectRef = D622363D2F53C04B00FA37E7 /* FreshCheck.xcodeproj */;
@@ -270,7 +282,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7675C7R6G9;
 				ENABLE_PREVIEWS = YES;
+				FRESHCHECK_PROXY_TOKEN = "u4SP5nEABXjU1CQ0QoNSnAcPnWee1RXvHp6bxR9i9Po=";
+				FRESHCHECK_PROXY_URL = "freshtrack-production-9f3e.up.railway.app";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_FRESHCHECK_PROXY_TOKEN = "$(FRESHCHECK_PROXY_TOKEN)";
+				INFOPLIST_KEY_FRESHCHECK_PROXY_URL = "$(FRESHCHECK_PROXY_URL)";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "FreshCheck uses the camera to photograph food items and automatically detect their expiry dates.";
 				INFOPLIST_KEY_NSUserNotificationUsageDescription = "FreshCheck sends a daily digest of items expiring soon in your fridge.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -282,7 +299,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.weibo.FreshCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -308,7 +325,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7675C7R6G9;
 				ENABLE_PREVIEWS = YES;
+				FRESHCHECK_PROXY_TOKEN = "u4SP5nEABXjU1CQ0QoNSnAcPnWee1RXvHp6bxR9i9Po=";
+				FRESHCHECK_PROXY_URL = "freshtrack-production-9f3e.up.railway.app";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_FRESHCHECK_PROXY_TOKEN = "$(FRESHCHECK_PROXY_TOKEN)";
+				INFOPLIST_KEY_FRESHCHECK_PROXY_URL = "$(FRESHCHECK_PROXY_URL)";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "FreshCheck uses the camera to photograph food items and automatically detect their expiry dates.";
 				INFOPLIST_KEY_NSUserNotificationUsageDescription = "FreshCheck sends a daily digest of items expiring soon in your fridge.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -320,7 +342,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.weibo.FreshCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

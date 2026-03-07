@@ -26,7 +26,7 @@
 "camera.opening" = "正在打开相机...";
 "camera.addFood" = "添加食物";
 "camera.service.error.title" = "服务配置错误";
-"camera.service.error.default" = "缺少代理配置。请在 Xcode Scheme 环境变量中设置 FRESHCHECK_PROXY_URL（可选 FRESHCHECK_PROXY_TOKEN）。";
+"camera.service.error.default" = "缺少代理配置。请在 Target 的 Build Settings 中设置 FRESHCHECK_PROXY_URL（可选 FRESHCHECK_PROXY_TOKEN），并写入 Info.plist。";
 "camera.manual.title" = "无法识别该食物";
 "camera.manual.desc" = "请手动输入食物名称。";
 "camera.field.foodName" = "食物名称";

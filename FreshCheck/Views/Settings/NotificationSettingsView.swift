@@ -80,10 +80,11 @@ struct NotificationSettingsView: View {
         reminderHour = hour
         reminderMinute = minute
         NotificationService.saveReminderTime(hour: hour, minute: minute)
+        let message = NotificationService.buildDigestMessage(for: items)
         Task {
             let granted = await NotificationService.requestPermission()
             if granted {
-                NotificationService.scheduleDailyDigest(hour: hour, minute: minute, items: items)
+                NotificationService.scheduleDailyDigest(hour: hour, minute: minute, message: message)
             }
         }
     }
