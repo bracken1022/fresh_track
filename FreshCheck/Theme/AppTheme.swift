@@ -112,6 +112,9 @@ enum AppTheme {
         static let consumedAction = "checkmark.circle"
         static let wastedAction   = "trash"
 
+        // Empty state
+        static let allCleared = "checkmark.seal.fill"
+
         // Metadata
         static let calendar  = "calendar"
         static let aiSource  = "sparkles"

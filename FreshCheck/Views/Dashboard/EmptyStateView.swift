@@ -14,7 +14,7 @@ struct EmptyStateView: View {
         VStack(spacing: AppTheme.Spacing.xl) {
             Spacer()
 
-            Image(systemName: variant == .neverLogged ? AppTheme.Icons.fridgeTab : "checkmark.seal.fill")
+            Image(systemName: variant == .neverLogged ? AppTheme.Icons.fridgeTab : AppTheme.Icons.allCleared)
                 .font(.system(size: 56))
                 .foregroundColor(variant == .neverLogged ? AppTheme.Colors.textSecondary : AppTheme.Colors.fresh)
 
