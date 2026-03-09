@@ -5,6 +5,7 @@ import SwiftData
 struct ContentView: View {
     @Query private var items: [FoodItem]
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+    @Environment(SubscriptionService.self) private var subscriptionService
 
     var body: some View {
         TabView {
@@ -26,6 +27,12 @@ struct ContentView: View {
             set: { _ in }
         )) {
             OnboardingView()
+        }
+        .fullScreenCover(isPresented: Binding(
+            get: { hasSeenOnboarding && !subscriptionService.isAccessAllowed },
+            set: { _ in }
+        )) {
+            PaywallView(isDismissible: false)
         }
     }
 }
