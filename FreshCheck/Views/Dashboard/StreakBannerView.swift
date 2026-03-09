@@ -15,7 +15,7 @@ struct StreakBannerView: View {
         }
         .padding(.horizontal, AppTheme.Spacing.lg)
         .padding(.vertical, AppTheme.Spacing.sm)
-        .background(Color.orange.opacity(0.12))
+        .background(AppTheme.Colors.expiringSoon.opacity(0.12))
         .cornerRadius(AppTheme.Radius.md)
         .padding(.horizontal, AppTheme.Spacing.lg)
         .padding(.top, AppTheme.Spacing.xs)
