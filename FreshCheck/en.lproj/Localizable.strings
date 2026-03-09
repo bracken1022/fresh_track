@@ -81,3 +81,15 @@
 "empty.allCleared.title" = "All clear!";
 "empty.allCleared.desc" = "Nothing expiring. Log new food to stay on top.";
 "empty.cta" = "Log Food";
+
+"paywall.headline" = "Keep your fridge fresh";
+"paywall.feature1" = "AI reads expiry dates from photos";
+"paywall.feature2" = "Daily reminders before food expires";
+"paywall.feature3" = "Track your food waste over time";
+"paywall.cta.trial" = "Start 7-Day Free Trial";
+"paywall.cta.subscribe" = "Subscribe Now";
+"paywall.restore" = "Restore Purchases";
+"paywall.save.badge" = "Save {pct}%";
+"paywall.error.title" = "Purchase Failed";
+"paywall.error.restore" = "Nothing to Restore";
+"trial.banner" = "Your free trial ends tomorrow — subscribe to keep access.";

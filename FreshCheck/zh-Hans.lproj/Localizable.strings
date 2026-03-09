@@ -81,3 +81,15 @@
 "empty.allCleared.title" = "全部清空！";
 "empty.allCleared.desc" = "没有即将过期的食物。记录新食物，随时掌握新鲜度。";
 "empty.cta" = "记录食物";
+
+"paywall.headline" = "保持冰箱新鲜";
+"paywall.feature1" = "AI 从照片读取保质期";
+"paywall.feature2" = "食物过期前每日提醒";
+"paywall.feature3" = "追踪你的食物浪费情况";
+"paywall.cta.trial" = "开始 7 天免费试用";
+"paywall.cta.subscribe" = "立即订阅";
+"paywall.restore" = "恢复购买";
+"paywall.save.badge" = "节省 {pct}%";
+"paywall.error.title" = "购买失败";
+"paywall.error.restore" = "暂无可恢复的购买";
+"trial.banner" = "您的免费试用明天结束 — 订阅以继续使用。";
