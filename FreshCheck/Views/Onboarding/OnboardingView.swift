@@ -40,8 +40,6 @@ struct OnboardingView: View {
 
     private var bottomControls: some View {
         VStack(spacing: AppTheme.Spacing.lg) {
-            Spacer()
-
             if currentPage < pages.count - 1 {
                 Button {
                     withAnimation { currentPage += 1 }
