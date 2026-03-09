@@ -34,6 +34,8 @@ struct DashboardView: View {
     }
 
     @Query(sort: \FoodItem.expiryDate) private var items: [FoodItem]
+    @Query private var allItems: [FoodItem]
+    @AppStorage(StreakService.currentStreakKey) private var currentStreak: Int = 0
     @Environment(\.modelContext) private var context
     @State private var showingAddFood = false
     @State private var showingReminderSettings = false
@@ -70,6 +72,9 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: AppTheme.Spacing.sm) {
+                if currentStreak >= 2 {
+                    StreakBannerView(streak: currentStreak)
+                }
                 categoryFilters
 
                 List {
@@ -135,11 +140,10 @@ struct DashboardView: View {
             }
             .overlay {
                 if filteredItems.isEmpty {
-                    ContentUnavailableView(
-                        L10n.tr("dashboard.empty.title"),
-                        systemImage: AppTheme.Icons.fridgeTab,
-                        description: Text(L10n.tr("dashboard.empty.desc"))
-                    )
+                    let variant: EmptyStateView.Variant = allItems.isEmpty ? .neverLogged : .allCleared
+                    EmptyStateView(variant: variant) {
+                        showingAddFood = true
+                    }
                 }
             }
         }
@@ -208,5 +212,6 @@ struct DashboardView: View {
         context.insert(record)
         item.disposalStatus = outcome == .consumed ? .consumed : .wasted
         try? PhotoStorageService.delete(at: item.photoURL)
+        StreakService.recordActivity()
     }
 }
