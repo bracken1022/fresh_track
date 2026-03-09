@@ -6,9 +6,9 @@ import Observation
 
     // MARK: - Constants
     static let shared = SubscriptionService()
-    static let productIDs = ["foodai.pro.monthly", "foodai.pro.yearly"]
-    static let trialStartKey = "trialStartDate"
-    static let trialDurationDays = 7
+    private static let productIDs = ["foodai.pro.monthly", "foodai.pro.yearly"]
+    static let trialStartKey = "trialStartDate"   // internal — FreshCheckApp reads this
+    private static let trialDurationDays = 7
 
     // MARK: - Published state
     var isSubscribed: Bool = false
