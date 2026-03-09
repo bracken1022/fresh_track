@@ -91,5 +91,4 @@
 "paywall.restore" = "恢复购买";
 "paywall.save.badge" = "节省 {pct}%";
 "paywall.error.title" = "购买失败";
-"paywall.error.restore" = "暂无可恢复的购买";
 "trial.banner" = "您的免费试用明天结束 — 订阅以继续使用。";

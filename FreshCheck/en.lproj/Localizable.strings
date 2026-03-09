@@ -91,5 +91,4 @@
 "paywall.restore" = "Restore Purchases";
 "paywall.save.badge" = "Save {pct}%";
 "paywall.error.title" = "Purchase Failed";
-"paywall.error.restore" = "Nothing to Restore";
 "trial.banner" = "Your free trial ends tomorrow — subscribe to keep access.";
