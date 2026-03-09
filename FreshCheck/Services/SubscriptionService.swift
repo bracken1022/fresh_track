@@ -114,9 +114,9 @@ import Observation
               let annual  = products.first(where: { $0.id == "foodai.pro.yearly" }) else {
             return nil
         }
-        let monthlyYear = monthly.price * 12
+        let monthlyYear = monthly.price * Decimal(12)
         guard monthlyYear > 0 else { return nil }
         let saving = (monthlyYear - annual.price) / monthlyYear
-        return Int((saving * 100).rounded())
+        return Int(NSDecimalNumber(decimal: saving * 100).rounding(accordingToBehavior: nil).intValue)
     }
 }
