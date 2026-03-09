@@ -59,10 +59,10 @@ final class NotificationService {
 
     // Internal for testability
     static func buildDigestMessage(for items: [FoodItem]) -> String? {
-        let urgentItems = items.filter { $0.daysRemaining <= 2 }
+        let urgentItems = items.filter { $0.daysRemaining <= 3 }
         guard !urgentItems.isEmpty else { return nil }
         let names = urgentItems.prefix(5).map { $0.name }.joined(separator: ", ")
         let count = urgentItems.count
-        return "\(count) item\(count == 1 ? "" : "s") expiring within 2 days or expired: \(names)."
+        return "\(count) item\(count == 1 ? "" : "s") expiring within 3 days or expired: \(names)."
     }
 }

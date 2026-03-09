@@ -9,6 +9,7 @@
 /* Begin PBXFileReference section */
 		D62234E62F53BA7A00FA37E7 /* FreshCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D622366E2F53C05F00FA37E7 /* FreshCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FreshCheck.xcodeproj; sourceTree = "<group>"; };
+		D62237012F5BE90A00FA37E7 /* FreshCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FreshCheck.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -47,6 +48,11 @@
 			sourceTree = "<group>";
 		};
 		D62236702F53C05F00FA37E7 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D62237042F5BE90A00FA37E7 /* Products */ = {
 			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +114,10 @@
 				{
 					ProductGroup = D62236702F53C05F00FA37E7 /* Products */;
 					ProjectRef = D622366E2F53C05F00FA37E7 /* FreshCheck.xcodeproj */;
+				},
+				{
+					ProductGroup = D62237042F5BE90A00FA37E7 /* Products */;
+					ProjectRef = D62237012F5BE90A00FA37E7 /* FreshCheck.xcodeproj */;
 				},
 			);
 			projectRoot = "";

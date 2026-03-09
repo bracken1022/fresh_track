@@ -38,6 +38,7 @@ struct DashboardView: View {
     @State private var showingAddFood = false
     @State private var showingReminderSettings = false
     @State private var selectedFilter: CategoryFilter = .all
+    @State private var itemToEdit: FoodItem? = nil
     @AppStorage(L10n.appLanguageStorageKey) private var appLanguageRawValue: String = AppLanguage.system.rawValue
 
     private var activeItems: [FoodItem] {
@@ -86,6 +87,12 @@ struct DashboardView: View {
                                         }
                                         .tint(AppTheme.Colors.consumed)
                                     }
+                                    .swipeActions(edge: .leading) {
+                                        Button(L10n.tr("dashboard.action.edit")) {
+                                            itemToEdit = item
+                                        }
+                                        .tint(AppTheme.Colors.accent)
+                                    }
                             }
                         } header: {
                             categoryHeader(for: group.category)
@@ -122,6 +129,9 @@ struct DashboardView: View {
             }
             .sheet(isPresented: $showingReminderSettings) {
                 NotificationSettingsView()
+            }
+            .sheet(item: $itemToEdit) { item in
+                EditFoodItemView(item: item) { itemToEdit = nil }
             }
             .overlay {
                 if filteredItems.isEmpty {
