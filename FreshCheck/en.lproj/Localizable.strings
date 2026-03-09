@@ -75,7 +75,7 @@
 "onboarding.cta.next" = "Next";
 "onboarding.cta.getStarted" = "Get Started";
 
-"streak.banner" = " {n}-day streak — keep it up!";
+"streak.banner" = "{n}-day streak — keep it up!";
 "empty.neverLogged.title" = "Your fridge is empty";
 "empty.neverLogged.desc" = "Tap below to log your first food item.";
 "empty.allCleared.title" = "All clear!";

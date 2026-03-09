@@ -34,7 +34,7 @@ struct DashboardView: View {
     }
 
     @Query(sort: \FoodItem.expiryDate) private var items: [FoodItem]
-    @Query private var allItems: [FoodItem]
+    @Query private var allItems: [FoodItem]  // all statuses — consumed/wasted intentionally count as "ever logged"
     @AppStorage(StreakService.currentStreakKey) private var currentStreak: Int = 0
     @Environment(\.modelContext) private var context
     @State private var showingAddFood = false
