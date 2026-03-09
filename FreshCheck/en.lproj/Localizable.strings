@@ -6,6 +6,7 @@
 "dashboard.empty.desc" = "Tap the camera icon to add food.";
 "dashboard.action.wasted" = "Wasted";
 "dashboard.action.consumed" = "Consumed";
+"dashboard.action.edit" = "Edit";
 "dashboard.filter.all" = "All";
 "dashboard.filter.meats" = "Meats";
 "dashboard.filter.vegetables" = "Vegetables";
@@ -33,7 +34,9 @@
 "common.add" = "Add";
 "common.cancel" = "Cancel";
 "common.ok" = "OK";
+"common.save" = "Save";
 
+"edit.title" = "Edit Item";
 "analysis.title" = "Confirm Food Item";
 "analysis.section.detected" = "Detected Food";
 "analysis.section.expiry" = "Expiry Date";
@@ -62,3 +65,12 @@
 "notif.quickSet.title" = "Quick Set";
 "notif.timePicker.title" = "Daily Reminder";
 "notif.timePicker.label" = "Time";
+
+"onboarding.page1.headline" = "Food goes bad before you notice";
+"onboarding.page1.subtitle" = "Every week, good food gets thrown away. It doesn't have to.";
+"onboarding.page2.headline" = "Just take a photo";
+"onboarding.page2.subtitle" = "FreshCheck reads the expiry date — or estimates it for you.";
+"onboarding.page3.headline" = "We'll remind you before it's too late";
+"onboarding.page3.subtitle" = "A daily nudge before anything expires.";
+"onboarding.cta.next" = "Next";
+"onboarding.cta.getStarted" = "Get Started";

@@ -6,6 +6,7 @@
 "dashboard.empty.desc" = "点击相机图标添加食物。";
 "dashboard.action.wasted" = "已浪费";
 "dashboard.action.consumed" = "已食用";
+"dashboard.action.edit" = "编辑";
 "dashboard.filter.all" = "全部";
 "dashboard.filter.meats" = "肉类";
 "dashboard.filter.vegetables" = "蔬菜";
@@ -33,7 +34,9 @@
 "common.add" = "添加";
 "common.cancel" = "取消";
 "common.ok" = "确定";
+"common.save" = "保存";
 
+"edit.title" = "编辑食物";
 "analysis.title" = "确认食物信息";
 "analysis.section.detected" = "识别结果";
 "analysis.section.expiry" = "过期日期";
@@ -62,3 +65,12 @@
 "notif.quickSet.title" = "快速设置";
 "notif.timePicker.title" = "每日提醒";
 "notif.timePicker.label" = "时间";
+
+"onboarding.page1.headline" = "食物悄悄变质，你却浑然不觉";
+"onboarding.page1.subtitle" = "每周都有好食物被白白扔掉，其实完全可以避免。";
+"onboarding.page2.headline" = "拍张照片就够了";
+"onboarding.page2.subtitle" = "FreshCheck 自动读取保质期，或智能估算新鲜时长。";
+"onboarding.page3.headline" = "过期前，我们会提醒你";
+"onboarding.page3.subtitle" = "每天一条提醒，让食物不再浪费。";
+"onboarding.cta.next" = "下一步";
+"onboarding.cta.getStarted" = "开始使用";
