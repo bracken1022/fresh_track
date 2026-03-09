@@ -42,6 +42,8 @@ struct DashboardView: View {
     @State private var selectedFilter: CategoryFilter = .all
     @State private var itemToEdit: FoodItem? = nil
     @AppStorage(L10n.appLanguageStorageKey) private var appLanguageRawValue: String = AppLanguage.system.rawValue
+    @Environment(SubscriptionService.self) private var subscriptionService
+    @State private var showingPaywall = false
 
     private var activeItems: [FoodItem] {
         items.filter { $0.status != .consumed && $0.status != .wasted }
@@ -72,6 +74,9 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: AppTheme.Spacing.sm) {
+                if subscriptionService.trialDaysRemaining == 1 {
+                    TrialBannerView { showingPaywall = true }
+                }
                 if currentStreak >= 2 {
                     StreakBannerView(streak: currentStreak)
                 }
@@ -137,6 +142,9 @@ struct DashboardView: View {
             }
             .sheet(item: $itemToEdit) { item in
                 EditFoodItemView(item: item) { itemToEdit = nil }
+            }
+            .sheet(isPresented: $showingPaywall) {
+                PaywallView(isDismissible: true)
             }
             .overlay {
                 if filteredItems.isEmpty {
