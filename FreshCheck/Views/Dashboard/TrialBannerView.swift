@@ -8,7 +8,7 @@ struct TrialBannerView: View {
         Button(action: onTap) {
             HStack(spacing: AppTheme.Spacing.sm) {
                 Image(systemName: "clock.badge.exclamationmark.fill")
-                    .foregroundColor(.orange)
+                    .foregroundColor(AppTheme.Colors.expiringSoon)
                 Text(L10n.tr("trial.banner"))
                     .font(AppTheme.Typography.captionBold)
                     .foregroundColor(AppTheme.Colors.textPrimary)
@@ -20,7 +20,7 @@ struct TrialBannerView: View {
             }
             .padding(.horizontal, AppTheme.Spacing.lg)
             .padding(.vertical, AppTheme.Spacing.sm)
-            .background(Color.orange.opacity(0.12))
+            .background(AppTheme.Colors.expiringSoon.opacity(0.12))
             .cornerRadius(AppTheme.Radius.md)
             .padding(.horizontal, AppTheme.Spacing.lg)
             .padding(.top, AppTheme.Spacing.xs)
