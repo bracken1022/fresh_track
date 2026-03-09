@@ -100,6 +100,7 @@ struct AddFoodFlow: View {
             confidenceSource: vm.confidenceSource
         )
         context.insert(item)
+        StreakService.recordActivity()
         dismiss()
     }
 }
