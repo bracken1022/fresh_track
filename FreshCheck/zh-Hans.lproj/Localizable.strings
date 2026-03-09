@@ -74,3 +74,10 @@
 "onboarding.page3.subtitle" = "每天一条提醒，让食物不再浪费。";
 "onboarding.cta.next" = "下一步";
 "onboarding.cta.getStarted" = "开始使用";
+
+"streak.banner" = " 已连续记录 {n} 天，继续保持！";
+"empty.neverLogged.title" = "冰箱是空的";
+"empty.neverLogged.desc" = "点击下方按钮，记录你的第一件食物。";
+"empty.allCleared.title" = "全部清空！";
+"empty.allCleared.desc" = "没有即将过期的食物。记录新食物，随时掌握新鲜度。";
+"empty.cta" = "记录食物";

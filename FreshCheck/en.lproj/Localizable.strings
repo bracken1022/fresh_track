@@ -74,3 +74,10 @@
 "onboarding.page3.subtitle" = "A daily nudge before anything expires.";
 "onboarding.cta.next" = "Next";
 "onboarding.cta.getStarted" = "Get Started";
+
+"streak.banner" = " {n}-day streak — keep it up!";
+"empty.neverLogged.title" = "Your fridge is empty";
+"empty.neverLogged.desc" = "Tap below to log your first food item.";
+"empty.allCleared.title" = "All clear!";
+"empty.allCleared.desc" = "Nothing expiring. Log new food to stay on top.";
+"empty.cta" = "Log Food";
