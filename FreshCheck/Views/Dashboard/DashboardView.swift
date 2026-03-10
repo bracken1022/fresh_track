@@ -1,6 +1,7 @@
 // FreshCheck/Views/Dashboard/DashboardView.swift
 import SwiftUI
 import SwiftData
+import UIKit
 
 struct DashboardView: View {
     private enum CategoryFilter: String, CaseIterable, Identifiable {
@@ -44,6 +45,9 @@ struct DashboardView: View {
     @AppStorage(L10n.appLanguageStorageKey) private var appLanguageRawValue: String = AppLanguage.system.rawValue
     @Environment(SubscriptionService.self) private var subscriptionService
     @State private var showingPaywall = false
+    private let foregroundPublisher = NotificationCenter.default.publisher(
+        for: UIApplication.willEnterForegroundNotification
+    )
 
     private var activeItems: [FoodItem] {
         items.filter { $0.status != .consumed && $0.status != .wasted }
@@ -154,6 +158,11 @@ struct DashboardView: View {
                     }
                 }
             }
+            .onAppear { handlePendingNotificationAction() }
+            .onReceive(foregroundPublisher) { _ in
+                NotificationService.scheduleSmartDigest(items: items)
+                handlePendingNotificationAction()
+            }
         }
     }
 
@@ -221,5 +230,21 @@ struct DashboardView: View {
         item.disposalStatus = outcome == .consumed ? .consumed : .wasted
         try? PhotoStorageService.delete(at: item.photoURL)
         StreakService.recordActivity()
+        NotificationService.scheduleSmartDigest(items: activeItems.filter { $0.id != item.id })
+    }
+
+    private func handlePendingNotificationAction() {
+        let defaults = UserDefaults.standard
+        guard let uuidString = defaults.string(forKey: NotificationHandler.pendingItemUUIDKey),
+              let outcome    = defaults.string(forKey: NotificationHandler.pendingOutcomeKey),
+              let uuid       = UUID(uuidString: uuidString),
+              let item       = items.first(where: { $0.id == uuid })
+        else { return }
+
+        defaults.removeObject(forKey: NotificationHandler.pendingItemUUIDKey)
+        defaults.removeObject(forKey: NotificationHandler.pendingOutcomeKey)
+
+        let disposalOutcome: DisposalOutcome = outcome == "consumed" ? .consumed : .wasted
+        dispose(item, outcome: disposalOutcome)
     }
 }
