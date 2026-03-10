@@ -63,7 +63,7 @@ final class NotificationService {
                                message: message, singleItem: singleItem)
     }
 
-    // MARK: - Legacy API (used by NotificationSettingsView — keep for compat)
+    // MARK: - Legacy API (kept for backward compat with external callers; not used internally)
     static func scheduleUsingSavedTime(message: String?) {
         let saved = currentReminderTime()
         scheduleDailyDigest(hour: saved.hour, minute: saved.minute, message: message)
@@ -77,6 +77,7 @@ final class NotificationService {
 
     // MARK: - Content builder (internal for testability)
     static func buildSmartContent(for items: [FoodItem]) -> (message: String?, singleItem: FoodItem?) {
+        // No active items in fridge — skip notification entirely (nothing to track)
         guard !items.isEmpty else { return (nil, nil) }
 
         let expired = items.filter { $0.daysRemaining < 0 }

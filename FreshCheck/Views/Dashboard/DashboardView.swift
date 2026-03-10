@@ -158,6 +158,7 @@ struct DashboardView: View {
                     }
                 }
             }
+            // Safe to call on every appear — handlePendingNotificationAction clears keys on first run
             .onAppear { handlePendingNotificationAction() }
             .onReceive(foregroundPublisher) { _ in
                 NotificationService.scheduleSmartDigest(items: items)

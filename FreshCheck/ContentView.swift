@@ -15,6 +15,8 @@ struct ContentView: View {
                 .tabItem { Label(L10n.tr("tab.stats"), systemImage: AppTheme.Icons.statsTab) }
         }
         .tint(AppTheme.Colors.accent)
+        // Re-schedule digest on every launch (covers returning users; new users also
+        // schedule in OnboardingView.onDismiss, but scheduleSmartDigest is idempotent).
         .task {
             let granted = await NotificationService.requestPermission()
             if granted {
