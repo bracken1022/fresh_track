@@ -18,8 +18,7 @@ struct ContentView: View {
         .task {
             let granted = await NotificationService.requestPermission()
             if granted {
-                let message = NotificationService.buildDigestMessage(for: items)
-                NotificationService.scheduleUsingSavedTime(message: message)
+                NotificationService.scheduleSmartDigest(items: items)
             }
         }
         .fullScreenCover(isPresented: Binding(
