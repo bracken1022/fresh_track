@@ -1,7 +1,7 @@
 // FreshCheck/Views/Dashboard/DashboardView.swift
 import SwiftUI
 import SwiftData
-import UIKit
+import UIKit // for UIApplication.willEnterForegroundNotification
 
 struct DashboardView: View {
     private enum CategoryFilter: String, CaseIterable, Identifiable {
@@ -230,6 +230,7 @@ struct DashboardView: View {
         item.disposalStatus = outcome == .consumed ? .consumed : .wasted
         try? PhotoStorageService.delete(at: item.photoURL)
         StreakService.recordActivity()
+        // Exclude just-disposed item: @Query may not yet reflect the status mutation
         NotificationService.scheduleSmartDigest(items: activeItems.filter { $0.id != item.id })
     }
 
