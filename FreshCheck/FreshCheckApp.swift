@@ -1,6 +1,7 @@
 // FreshCheck/FreshCheckApp.swift
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 @main
 struct FreshCheckApp: App {
@@ -13,6 +14,10 @@ struct FreshCheckApp: App {
         if UserDefaults.standard.object(forKey: SubscriptionService.trialStartKey) == nil {
             UserDefaults.standard.set(Date(), forKey: SubscriptionService.trialStartKey)
         }
+
+        // Register notification actions and set delegate
+        NotificationService.registerActionCategories()
+        UNUserNotificationCenter.current().delegate = NotificationHandler.shared
     }
 
     var body: some Scene {
