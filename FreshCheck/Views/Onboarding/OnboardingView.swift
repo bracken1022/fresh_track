@@ -1,10 +1,12 @@
 // FreshCheck/Views/Onboarding/OnboardingView.swift
 import SwiftUI
+import SwiftData
 
 struct OnboardingView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var currentPage = 0
     @State private var showingAddFood = false
+    @Query private var items: [FoodItem]
 
     private let pages: [(icon: String, headlineKey: String, subtitleKey: String, color: Color)] = [
         ("trash.slash.fill",   "onboarding.page1.headline", "onboarding.page1.subtitle", Color(red: 0.20, green: 0.60, blue: 0.35)),
@@ -33,6 +35,12 @@ struct OnboardingView: View {
         .ignoresSafeArea()
         .sheet(isPresented: $showingAddFood, onDismiss: {
             hasSeenOnboarding = true
+            Task {
+                let granted = await NotificationService.requestPermission()
+                if granted {
+                    NotificationService.scheduleSmartDigest(items: items)
+                }
+            }
         }) {
             AddFoodFlow()
         }
