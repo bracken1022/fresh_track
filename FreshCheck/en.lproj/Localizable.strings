@@ -65,6 +65,10 @@
 "notif.quickSet.title" = "Quick Set";
 "notif.timePicker.title" = "Daily Reminder";
 "notif.timePicker.label" = "Time";
+"notif.action.consumed" = "Consumed";
+"notif.action.wasted" = "Wasted";
+"notif.body.allClear" = "Your fridge is looking good — nothing expiring soon.";
+"notif.body.single" = "{name} expires in {days} day(s) — plan to use it?";
 
 "onboarding.page1.headline" = "Food goes bad before you notice";
 "onboarding.page1.subtitle" = "Every week, good food gets thrown away. It doesn't have to.";

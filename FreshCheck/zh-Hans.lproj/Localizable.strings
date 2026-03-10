@@ -65,6 +65,10 @@
 "notif.quickSet.title" = "快速设置";
 "notif.timePicker.title" = "每日提醒";
 "notif.timePicker.label" = "时间";
+"notif.action.consumed" = "已食用";
+"notif.action.wasted" = "已浪费";
+"notif.body.allClear" = "冰箱一切正常，近期无食物过期。";
+"notif.body.single" = "{name} 还有 {days} 天过期，记得使用！";
 
 "onboarding.page1.headline" = "食物悄悄变质，你却浑然不觉";
 "onboarding.page1.subtitle" = "每周都有好食物被白白扔掉，其实完全可以避免。";
